@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="title">
+    <h2>LIST OF DEALERS</h2>
+</div>
+<form method="GET" action="{% url 'dealer_list' %}" class="search-form">
+    <input type="text" name="q" placeholder="Search by dealer name..." value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+</form>
+<div class="dealer-list">
+    {% for dealer in dealers %}
+        <div class="dealer-box">
+            {% if dealer.image %}
+                <img src="{{ dealer.image.url }}" alt="{{ dealer.user.username }}">
+            {% else %}
+                <img src="{% static 'main/default_dealer_image.jpg' %}" alt="Default Image">
+            {% endif %}
+            <h3>{{ dealer.user.username }}</h3>
+            <p>Email: {{ dealer.email }}</p>
+            <p>Selling: 
+                {% for car in dealer.car_set.all %}
+                    {{ car.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            <a href="{% url 'dealer_detail' dealer.pk %}">View Details</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

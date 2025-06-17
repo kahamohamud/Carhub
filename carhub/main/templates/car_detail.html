@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ car.name }}</h2>
+<div class="car-detail">
+    <img src="{{ car.image.url }}" alt="{{ car.name }}">
+    <p>Model: {{ car.model }}</p>
+    <p>Year: {{ car.year }}</p>
+    <p>Price: ${{ car.price }}</p>
+    <p>Dealer: {{ car.dealer.user.username }}</p>
+    <a href="{% url 'add_to_wishlist' car.id %}" class="wishlist-button">Add to Wishlist</a>
+</div>
+{% endblock %}

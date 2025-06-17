@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="dealer-detail-container">
+    <div class="dealer-header">
+        <h2>{{ dealer.user.username }}</h2>
+    </div>
+    <div class="dealer-detail">
+        {% if dealer.image %}
+            <img src="{{ dealer.image.url }}" alt="{{ dealer.user.username }}">
+        {% else %}
+            <img src="{% static 'main/default_dealer_image.jpg' %}" alt="Default Image">
+        {% endif %}
+        <div class="dealer-info">
+            <p><strong>Email:</strong> {{ dealer.user.email }}</p>
+            <h3>Cars Selling:</h3>
+            <ul>
+                {% for car in dealer.car_set.all %}
+                    <li>{{ car.name }} - {{ car.model }} - ${{ car.price }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

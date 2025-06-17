@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="wishlist-container">
+    <h2>My Wishlist</h2>
+    <div class="wishlist-items">
+        {% for item in wishlist_items %}
+            <div class="wishlist-item">
+                <img src="{{ item.car.image.url }}" alt="{{ item.car.name }}">
+                <div class="wishlist-info">
+                    <p><strong>{{ item.car.name }}</strong></p>
+                    <p>Model: {{ item.car.model }}</strong></p>
+                    <p>Year: {{ item.car.year }}</strong></p>
+                    <p>Price: ${{ item.car.price }}</strong></p>
+                    <a href="{% url 'car_detail' item.car.id %}" class="view-details-button">View Details</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
